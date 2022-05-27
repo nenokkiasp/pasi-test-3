@@ -2,8 +2,6 @@ services:
   rest_dotnet:
     build:
       context: ./rest_dotnet
-    environment:
-      PORT: 8080
     ports:
-    - 8080:8080
+    - 8080:80
 version: '3.9'
