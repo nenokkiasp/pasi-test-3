@@ -1,0 +1,25 @@
+name: Heroku Deployment
+on:
+  push:
+    branches:
+      - main
+jobs:
+    herokudeploy:
+      name: Deploy to Heroku
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout the code
+          uses: actions/checkout@v2
+        - name: Deploy ac6e9e670-rest-dotnet
+          uses: akhileshns/heroku-deploy@v3.12.12
+          with:
+            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+            heroku_app_name: ac6e9e670-rest-dotnet
+            heroku_email: ${{ secrets.HEROKU_EMAIL }}
+            region: eu
+            usedocker: true
+            
+            docker_build_args: |
+              BACKEND_API_URL
+          env:
+            BACKEND_API_URL: 'https://ac6e9e670-rest-dotnet.herokuapp.com'
